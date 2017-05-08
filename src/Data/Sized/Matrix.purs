@@ -7,7 +7,7 @@ import Data.Newtype (class Newtype, wrap, unwrap)
 import Data.Tuple (Tuple(..))
 import Data.Typelevel.Num.Ops (class Lt)
 import Data.Typelevel.Num.Reps (D0, D1)
-import Data.Typelevel.Num.Sets (class Nat, class Pos, toInt)
+import Data.Typelevel.Num.Sets (class Nat, toInt)
 import Data.Typelevel.Undefined (undefined)
 import Data.Vec (Vec)
 import Data.Vec as V
@@ -30,7 +30,7 @@ rows = unwrap
 row :: forall m n a i. Nat m => Nat i => Lt i m => Matrix m n a -> i -> Vec n a
 row m _ =  V.index (rows m) (undefined :: i)
 
-cols :: forall m n a. Nat m => Pos n => Matrix m n a -> Vec n (Vec m a)
+cols :: forall m n a. Nat m => Nat n => Matrix m n a -> Vec n (Vec m a)
 cols = distribute <<< rows
 
 col :: forall m n a j. Nat m => Nat n => Nat j => Lt j n => Matrix m n a -> j -> Vec m a
@@ -40,7 +40,7 @@ index :: forall m n a i j. Nat m => Nat n => Nat i => Nat j => Lt i m => Lt j n
       => Matrix m n a -> i -> j -> a
 index m _ _ = V.index (row m (undefined :: i)) (undefined :: j)
 
-transpose :: forall m n a. Nat m => Pos n => Matrix m n a -> Matrix n m a
+transpose :: forall m n a. Nat m => Nat n => Matrix m n a -> Matrix n m a
 transpose = wrap <<< cols
 
 dims :: forall m n a. Nat m => Nat n => Matrix m n a -> Tuple m n

@@ -9,7 +9,7 @@
   "dependencies": {
     "purescript-prelude": "^3.0.0",
     "purescript-console": "^3.0.0",
-    "purescript-sized-vectors": "matthewleon/purescript-sized-vectors#distributive",
+    "purescript-sized-vectors": "matthewleon/purescript-sized-vectors#integration",
     "purescript-typelevel": "^3.0.0",
     "purescript-arrays": "^4.0.1",
     "purescript-distributive": "^3.0.0"

@@ -3,6 +3,7 @@ module Data.Sized.Matrix where
 import Prelude
 import Data.Bifunctor (bimap)
 import Data.Distributive (distribute)
+import Data.Maybe (Maybe)
 import Data.Newtype (class Newtype, wrap, unwrap)
 import Data.Tuple (Tuple(..))
 import Data.Typelevel.Num.Ops (class Lt)
@@ -39,6 +40,9 @@ col m _ = map (\v -> V.index v (undefined :: j)) $ rows m
 index :: forall m n a i j. Nat m => Nat n => Nat i => Nat j => Lt i m => Lt j n
       => Matrix m n a -> i -> j -> a
 index m _ _ = V.index (row m (undefined :: i)) (undefined :: j)
+
+index' :: forall m n a. Matrix m n a -> Int -> Int -> Maybe a
+index' m i j = V.index' (rows m) i >>= \v -> V.index' v j
 
 transpose :: forall m n a. Nat m => Nat n => Matrix m n a -> Matrix n m a
 transpose = wrap <<< cols

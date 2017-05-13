@@ -15,6 +15,7 @@ import Data.Vec as V
 
 newtype Matrix m n a = Matrix (Vec m (Vec n a))
 derive instance newtypeMatrix :: Newtype (Matrix m n a) _
+derive newtype instance showMatrix :: (Show a, Nat m, Nat n) => Show (Matrix m n a)
 
 empty :: forall a. Matrix D0 D0 a
 empty = wrap V.empty
